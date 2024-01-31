@@ -14,8 +14,9 @@ import { UserModule } from './user/user.module';
       password: process.env.DB_PASSWORD,
       port: Number(process.env.DB_PORT),
       host: process.env.DB_HOST,
-      synchronize: true, // O ideal é deixar false e criar através de migrations
       entities: [`${__dirname}/**/*.entity{.js,.ts}`],
+      migrations: [`${__dirname}/migration/{.ts,*.js}`],
+      migrationsRun: true,
     }),
     UserModule,
   ],
