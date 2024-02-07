@@ -29,10 +29,10 @@ export class AddressController {
   }
 
   @Get()
-  async getAddressByUserId(
+  async findAddressByUserId(
     @UserId() userId: number,
   ): Promise<ReturnAddressDto[]> {
-    return (await this.addressService.getAddressByUserId(userId)).map(
+    return (await this.addressService.findAddressByUserId(userId)).map(
       (address) => new ReturnAddressDto(address),
     );
   }

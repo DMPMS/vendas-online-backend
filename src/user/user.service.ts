@@ -18,7 +18,7 @@ export class UserService {
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
-    const user = await this.getUserByEmail(createUserDto.email).catch(
+    const user = await this.findUserByEmail(createUserDto.email).catch(
       () => undefined,
     );
 
@@ -37,7 +37,7 @@ export class UserService {
     });
   }
 
-  async getUserByIdUsingRelations(userId: number): Promise<UserEntity> {
+  async findUserByIdUsingRelations(userId: number): Promise<UserEntity> {
     return this.userRepository.findOne({
       where: {
         id: userId,
@@ -52,11 +52,11 @@ export class UserService {
     });
   }
 
-  async getAllUser(): Promise<UserEntity[]> {
+  async findAllUser(): Promise<UserEntity[]> {
     return this.userRepository.find();
   }
 
-  async getUserById(userId: number): Promise<UserEntity> {
+  async findUserById(userId: number): Promise<UserEntity> {
     const user = await this.userRepository.findOne({
       where: {
         id: userId,
@@ -70,7 +70,7 @@ export class UserService {
     return user;
   }
 
-  async getUserByEmail(email: string): Promise<UserEntity> {
+  async findUserByEmail(email: string): Promise<UserEntity> {
     const user = await this.userRepository.findOne({
       where: {
         email: email,

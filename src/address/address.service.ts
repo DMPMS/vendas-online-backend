@@ -19,15 +19,15 @@ export class AddressService {
     createAddressDto: CreateAddressDto,
     userId: number,
   ): Promise<AddressEntity> {
-    await this.userService.getUserById(userId);
-    await this.cityService.getCityById(createAddressDto.cityId);
+    await this.userService.findUserById(userId);
+    await this.cityService.findCityById(createAddressDto.cityId);
     return this.addressRepository.save({
       ...createAddressDto,
       userId,
     });
   }
 
-  async getAddressByUserId(userId: number): Promise<AddressEntity[]> {
+  async findAddressByUserId(userId: number): Promise<AddressEntity[]> {
     const addresses = await this.addressRepository.find({
       where: {
         userId,

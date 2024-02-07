@@ -18,7 +18,7 @@ describe('AuthService', () => {
         {
           provide: UserService,
           useValue: {
-            getUserByEmail: jest.fn().mockResolvedValue(userEntityMock),
+            findUserByEmail: jest.fn().mockResolvedValue(userEntityMock),
           },
         },
         {
@@ -55,13 +55,13 @@ describe('AuthService', () => {
   });
 
   it('should return user if email not exist', async () => {
-    jest.spyOn(userService, 'getUserByEmail').mockResolvedValue(undefined);
+    jest.spyOn(userService, 'findUserByEmail').mockResolvedValue(undefined);
 
     expect(service.login(loginUserMock)).rejects.toThrowError();
   });
 
   it('should return error in UserService', async () => {
-    jest.spyOn(userService, 'getUserByEmail').mockRejectedValue(new Error());
+    jest.spyOn(userService, 'findUserByEmail').mockRejectedValue(new Error());
 
     expect(service.login(loginUserMock)).rejects.toThrowError();
   });

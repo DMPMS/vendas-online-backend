@@ -18,8 +18,8 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
-  async getAllCategories(): Promise<ReturnCategory[]> {
-    return (await this.categoryService.getAllCategories()).map(
+  async findAllCategories(): Promise<ReturnCategory[]> {
+    return (await this.categoryService.findAllCategories()).map(
       (category) => new ReturnCategory(category),
     );
   }

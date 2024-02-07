@@ -23,13 +23,13 @@ describe('AddressService', () => {
         {
           provide: UserService,
           useValue: {
-            getUserById: jest.fn().mockResolvedValue(userEntityMock),
+            findUserById: jest.fn().mockResolvedValue(userEntityMock),
           },
         },
         {
           provide: CityService,
           useValue: {
-            getCityById: jest.fn().mockResolvedValue(cityMock),
+            findCityById: jest.fn().mockResolvedValue(cityMock),
           },
         },
         {
@@ -67,7 +67,7 @@ describe('AddressService', () => {
   });
 
   it('should return error if exception in userService', async () => {
-    jest.spyOn(userService, 'getUserById').mockRejectedValueOnce(new Error());
+    jest.spyOn(userService, 'findUserById').mockRejectedValueOnce(new Error());
 
     expect(
       service.createAddress(createAddressMock, userEntityMock.id),
@@ -75,7 +75,7 @@ describe('AddressService', () => {
   });
 
   it('should return error if exception in cityService', async () => {
-    jest.spyOn(cityService, 'getCityById').mockRejectedValueOnce(new Error());
+    jest.spyOn(cityService, 'findCityById').mockRejectedValueOnce(new Error());
 
     expect(
       service.createAddress(createAddressMock, userEntityMock.id),
@@ -83,7 +83,7 @@ describe('AddressService', () => {
   });
 
   it('should return all addresses to user', async () => {
-    const addresses = await service.getAddressByUserId(userEntityMock.id);
+    const addresses = await service.findAddressByUserId(userEntityMock.id);
 
     expect(addresses).toEqual([addressMock]);
   });
@@ -92,7 +92,7 @@ describe('AddressService', () => {
     jest.spyOn(addressRepository, 'find').mockResolvedValue(undefined);
 
     expect(
-      service.getAddressByUserId(userEntityMock.id),
+      service.findAddressByUserId(userEntityMock.id),
     ).rejects.toThrowError();
   });
 });

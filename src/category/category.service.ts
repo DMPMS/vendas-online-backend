@@ -15,7 +15,7 @@ export class CategoryService {
     private readonly categoryRepository: Repository<CategoryEntity>,
   ) {}
 
-  async getAllCategories(): Promise<CategoryEntity[]> {
+  async findAllCategories(): Promise<CategoryEntity[]> {
     const categories = await this.categoryRepository.find();
 
     if (!categories || categories.length === 0) {
@@ -25,7 +25,7 @@ export class CategoryService {
     return categories;
   }
 
-  async getCategoryByName(name: string): Promise<CategoryEntity> {
+  async findCategoryByName(name: string): Promise<CategoryEntity> {
     const category = await this.categoryRepository.findOne({
       where: {
         name,
@@ -42,7 +42,7 @@ export class CategoryService {
   async createCategory(
     createCategory: CreateCategory,
   ): Promise<CategoryEntity> {
-    const category = await this.getCategoryByName(createCategory.name).catch(
+    const category = await this.findCategoryByName(createCategory.name).catch(
       () => undefined,
     );
 

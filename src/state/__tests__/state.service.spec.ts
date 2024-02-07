@@ -34,7 +34,7 @@ describe('StateService', () => {
   });
 
   it('should return list of states', async () => {
-    const state = await service.getAllState();
+    const state = await service.findAllState();
 
     expect(state).toEqual([stateMock]);
   });
@@ -42,6 +42,6 @@ describe('StateService', () => {
   it('should return error in exception', async () => {
     jest.spyOn(stateRepository, 'find').mockRejectedValueOnce(new Error());
 
-    expect(service.getAllState()).rejects.toThrowError();
+    expect(service.findAllState()).rejects.toThrowError();
   });
 });

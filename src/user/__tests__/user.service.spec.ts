@@ -36,7 +36,7 @@ describe('UserService', () => {
   });
 
   it('should return user in findUserByEmail', async () => {
-    const user = await service.getUserByEmail(userEntityMock.email);
+    const user = await service.findUserByEmail(userEntityMock.email);
 
     expect(user).toEqual(userEntityMock);
   });
@@ -44,17 +44,17 @@ describe('UserService', () => {
   it('should return error in findUserByEmail', async () => {
     jest.spyOn(userRepository, 'findOne').mockResolvedValue(undefined);
 
-    expect(service.getUserByEmail(userEntityMock.email)).rejects.toThrowError();
+    expect(service.findUserByEmail(userEntityMock.email)).rejects.toThrowError();
   });
 
   it('should return error in findUserByEmail (error DB)', async () => {
     jest.spyOn(userRepository, 'findOne').mockRejectedValueOnce(new Error());
 
-    expect(service.getUserByEmail(userEntityMock.email)).rejects.toThrowError();
+    expect(service.findUserByEmail(userEntityMock.email)).rejects.toThrowError();
   });
 
   it('should return user in findUserById', async () => {
-    const user = await service.getUserById(userEntityMock.id);
+    const user = await service.findUserById(userEntityMock.id);
 
     expect(user).toEqual(userEntityMock);
   });
@@ -62,17 +62,17 @@ describe('UserService', () => {
   it('should return error in findUserById', async () => {
     jest.spyOn(userRepository, 'findOne').mockResolvedValue(undefined);
 
-    expect(service.getUserByEmail(userEntityMock.email)).rejects.toThrowError();
+    expect(service.findUserByEmail(userEntityMock.email)).rejects.toThrowError();
   });
 
   it('should return error in findUserById (error DB)', async () => {
     jest.spyOn(userRepository, 'findOne').mockRejectedValueOnce(new Error());
 
-    expect(service.getUserById(userEntityMock.id)).rejects.toThrowError();
+    expect(service.findUserById(userEntityMock.id)).rejects.toThrowError();
   });
 
   it('should return user in getUserByIdUsingRelations', async () => {
-    const user = await service.getUserByIdUsingRelations(userEntityMock.id);
+    const user = await service.findUserByIdUsingRelations(userEntityMock.id);
 
     expect(user).toEqual(userEntityMock);
   });
