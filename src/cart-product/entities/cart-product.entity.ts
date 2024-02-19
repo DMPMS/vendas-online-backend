@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'cart-product' })
+@Entity({ name: 'cart_product' })
 export class CartProdutEntity {
   @PrimaryGeneratedColumn('rowid')
   id: number;

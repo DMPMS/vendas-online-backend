@@ -8,7 +8,7 @@ import {
 import { Roles } from 'src/decorators/roles.decorator';
 import { UserType } from 'src/user/enum/user-type.enum';
 import { CartService } from './cart.service';
-import { InsertCartDto } from './dto/insert-cart.dto';
+import { InsertCartDto } from './dtos/insert-cart.dto';
 import { UserId } from 'src/decorators/user-id.decorator';
 import { CartEntity } from './entities/cart.entity';
 
