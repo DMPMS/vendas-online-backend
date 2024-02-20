@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { Roles } from '../decorators/roles.decorator';
 import { UserType } from '../user/enum/user-type.enum';
-import { ReturnProduct } from './dtos/return-product.dto';
+import { ReturnProductDto } from './dtos/return-product.dto';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dtos/create-product.dto';
 import { ProductEntity } from './entities/product.entity';
@@ -24,9 +24,9 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get()
-  async findAllProducts(): Promise<ReturnProduct[]> {
+  async findAllProducts(): Promise<ReturnProductDto[]> {
     return (await this.productService.findAllProducts()).map(
-      (product) => new ReturnProduct(product),
+      (product) => new ReturnProductDto(product),
     );
   }
 
