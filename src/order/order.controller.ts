@@ -11,8 +11,8 @@ import { CreateOrderDto } from './dtos/create-order.dto';
 import { OrderService } from './order.service';
 import { UserId } from '../decorators/user-id.decorator';
 import { OrderEntity } from './entities/order.entity';
-import { Roles } from 'src/decorators/roles.decorator';
-import { UserType } from 'src/user/enum/user-type.enum';
+import { Roles } from '../decorators/roles.decorator';
+import { UserType } from '../user/enum/user-type.enum';
 import { ReturnOrderDto } from './dtos/return-order.dto';
 
 @Roles(UserType.Admin, UserType.User)
