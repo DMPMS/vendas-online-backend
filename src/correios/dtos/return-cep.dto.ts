@@ -1,6 +1,6 @@
 import { ReturnCepExternalDto } from './return-cep-external.dto';
 
-export class ReturnCep {
+export class ReturnCepDto {
   cep: string;
   publicPlace: string;
   complement: string;
