@@ -18,11 +18,11 @@ import { ProductEntity } from './entities/product.entity';
 import { DeleteResult } from 'typeorm';
 import { UpdateProductDto } from './dtos/update-product.dto';
 
-@Roles(UserType.Admin, UserType.User)
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
+  @Roles(UserType.Admin, UserType.User)
   @Get()
   async findAllProducts(): Promise<ReturnProductDto[]> {
     return (await this.productService.findAllProducts([], true)).map(
