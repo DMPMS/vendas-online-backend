@@ -8,12 +8,12 @@ import { ResponsePriceCorreios } from './dtos/response-price-correios';
 export class CorreiosController {
   constructor(private readonly correiosService: CorreiosService) {}
 
-  @Get('/price')
-  async priceDelivery(): Promise<ResponsePriceCorreios> {
-    return this.correiosService.priceDelivery();
-  }
+  // @Get('/price')
+  // async priceDelivery(): Promise<ResponsePriceCorreios> {
+  //   return this.correiosService.priceDelivery();
+  // }
 
-  @Get(':cep')
+  @Get('/:cep')
   async findAddressByCep(@Param('cep') cep: string): Promise<ReturnCepDto> {
     return this.correiosService.findAddressByCep(cep);
   }

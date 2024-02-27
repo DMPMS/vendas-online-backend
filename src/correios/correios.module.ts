@@ -7,10 +7,10 @@ import { SoapModule } from 'nestjs-soap';
 
 @Module({
   imports: [
-    SoapModule.register({
-      clientName: 'SOAP_CORREIOS',
-      uri: 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?wsdl',
-    }),
+    // SoapModule.register({
+    //   clientName: 'SOAP_CORREIOS',
+    //   uri: 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?wsdl',
+    // }),
     HttpModule.register({
       timeout: 5000,
       maxRedirects: 5,
