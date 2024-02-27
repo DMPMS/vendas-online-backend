@@ -5,10 +5,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { AxiosError, AxiosResponse } from 'axios';
-import { CityService } from 'src/city/city.service';
+import { CityService } from '../city/city.service';
 import { ReturnCepExternalDto } from './dtos/return-cep-external.dto';
 import { ReturnCepDto } from './dtos/return-cep.dto';
-import { CityEntity } from 'src/city/entities/city.entity';
+import { CityEntity } from '../city/entities/city.entity';
 
 @Injectable()
 export class CorreiosService {
