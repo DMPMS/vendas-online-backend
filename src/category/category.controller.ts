@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -15,6 +16,7 @@ import { ReturnCategory } from './dtos/return-category.dto';
 import { CategoryEntity } from './entities/category.entity';
 import { CreateCategory } from './dtos/create-category.dto';
 import { DeleteResult } from 'typeorm';
+import { UpdateCategoryDto } from './dtos/update-category.dto';
 @Roles(UserType.Admin, UserType.Root, UserType.User)
 @Controller('category')
 export class CategoryController {
@@ -40,5 +42,15 @@ export class CategoryController {
     @Body() createCategory: CreateCategory,
   ): Promise<CategoryEntity> {
     return this.categoryService.createCategory(createCategory);
+  }
+
+  @Roles(UserType.Admin, UserType.Root)
+  @UsePipes(ValidationPipe)
+  @Put(':categoryId')
+  async editCategory(
+    @Param('categoryId') categoryId: number,
+    @Body() updateCategory: UpdateCategoryDto,
+  ): Promise<CategoryEntity> {
+    return this.categoryService.updateCategory(categoryId, updateCategory);
   }
 }

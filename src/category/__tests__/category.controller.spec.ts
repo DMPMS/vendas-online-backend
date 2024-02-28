@@ -18,6 +18,7 @@ describe('CategoryController', () => {
             findAllCategories: jest.fn().mockResolvedValue([categoryMock]),
             createCategory: jest.fn().mockResolvedValue(categoryMock),
             deleteCategory: jest.fn().mockResolvedValue(returnDeleteMock),
+            updateCategory: jest.fn().mockResolvedValue(categoryMock),
           },
         },
       ],
