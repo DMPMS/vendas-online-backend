@@ -6,7 +6,7 @@ import {
   forwardRef,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CategoryEntity } from './entities/category.entity';
 import { CreateCategory } from './dtos/create-category.dto';
 import { ReturnCategory } from './dtos/return-category.dto';
@@ -56,11 +56,21 @@ export class CategoryService {
     );
   }
 
-  async findCategoryById(categoryId: number): Promise<CategoryEntity> {
+  async findCategoryById(
+    categoryId: number,
+    isRelations?: boolean,
+  ): Promise<CategoryEntity> {
+    const relations = isRelations
+      ? {
+          products: true,
+        }
+      : undefined;
+
     const category = await this.categoryRepository.findOne({
       where: {
         id: categoryId,
       },
+      relations,
     });
 
     if (!category) {
@@ -98,5 +108,17 @@ export class CategoryService {
     }
 
     return this.categoryRepository.save(createCategory);
+  }
+
+  async deleteCategory(categoryId: number): Promise<DeleteResult> {
+    const category = await this.findCategoryById(categoryId, true);
+
+    // Tive que fazer dessa forma, pois não consegui utilizar algo como lenght(category.products) > 0
+    // Porém, os testes não funcionaram. Tentar corrigir eles depois (estão comentados no teste do service de categorias)
+    if (category.products[0] !== undefined) {
+      throw new BadRequestException('Category with relations.');
+    }
+
+    return this.categoryRepository.delete({ id: categoryId });
   }
 }

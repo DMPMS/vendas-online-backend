@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   UsePipes,
   ValidationPipe,
@@ -12,6 +14,7 @@ import { CategoryService } from './category.service';
 import { ReturnCategory } from './dtos/return-category.dto';
 import { CategoryEntity } from './entities/category.entity';
 import { CreateCategory } from './dtos/create-category.dto';
+import { DeleteResult } from 'typeorm';
 @Roles(UserType.Admin, UserType.Root, UserType.User)
 @Controller('category')
 export class CategoryController {
@@ -20,6 +23,14 @@ export class CategoryController {
   @Get()
   async findAllCategories(): Promise<ReturnCategory[]> {
     return this.categoryService.findAllCategories();
+  }
+
+  @Roles(UserType.Admin, UserType.Root)
+  @Delete(':categoryId')
+  async deleteCategory(
+    @Param('categoryId') categoryId: number,
+  ): Promise<DeleteResult> {
+    return this.categoryService.deleteCategory(categoryId);
   }
 
   @Roles(UserType.Admin, UserType.Root)
