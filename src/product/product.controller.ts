@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -26,6 +27,16 @@ export class ProductController {
   @Get()
   async findAllProducts(): Promise<ReturnProductDto[]> {
     return (await this.productService.findAllProducts([], true)).map(
+      (product) => new ReturnProductDto(product),
+    );
+  }
+
+  @Roles(UserType.Admin, UserType.Root, UserType.User)
+  @Get('/page')
+  async findAllProductsPage(
+    @Query('search') search: string,
+  ): Promise<ReturnProductDto[]> {
+    return (await this.productService.findAllProductsPage(search)).map(
       (product) => new ReturnProductDto(product),
     );
   }
