@@ -11,7 +11,7 @@ import { CreateProductDto } from './dtos/create-product.dto';
 import { CategoryService } from '../category/category.service';
 import { UpdateProductDto } from './dtos/update-product.dto';
 import { CountProduct } from './dtos/count-product.dto';
-import { Pagination, PaginationMeta } from 'src/dtos/pagination.dto';
+import { Pagination, PaginationMeta } from '../dtos/pagination.dto';
 
 const DEFAULT_PAGE_SIZE = 10;
 const FIRST_PAGE = 1;
